@@ -1,0 +1,38 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-self: center;
+  width: 70%;
+  max-width: 700px;
+}
+
+.formTitle {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.inputDiv {
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  gap: 15px;
+}
+
+.inputDiv input {
+  color: #000000;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+
+.alertBtn {
+  padding: 7px 7px;
+  min-width: 90px;
+}
+
+@media (max-width: 720px) {
+  .inputDiv {
+    flex-direction: column;
+  }
+}

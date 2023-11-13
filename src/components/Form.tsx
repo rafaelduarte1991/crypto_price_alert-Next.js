@@ -1,50 +1,47 @@
 'use client'
-
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { CoinsContext } from '@/app/context/CoinsContext';
+import styles from '../styles/components/Form.module.css'
+import CoinPrice from './CoinPrice';
+import { iCoin } from '@/pages/api/coins';
 
 export default function Alert() {
-  const [coin, setCoin] = useState('');
+  const { coins, addCoin, updateCoin } = useContext(CoinsContext)
+  const [coinName, setCoinName] = useState('');
   const [target, setTarget] = useState('');
 
   function save() {
+    const tempCoin = {
+      name: coinName.toUpperCase(),
+      target: parseFloat(target.replace(',', '.')),
+    };
 
-    //update db
-    const data = {
-      coin:coin,
-      target:target
-    }
-    localStorage.setItem('data', JSON.stringify(data))
-
-
-    console.log('Coin:', coin);
-    console.log('Target Price:', target);
-
-    // Limpa os campos do formulário
-    setCoin('');
+    addCoin(tempCoin);
+    setCoinName('');
     setTarget('');
   }
 
+
   return (
-    <div>
-      <h1>Crypto Alert</h1>
-      <input
-        type="text"
-        id="coin"
-        placeholder="Coin"
-        value={coin}
-        onChange={(e) => setCoin(e.target.value)}
-      />
-      <input
-        type="text"
-        id="target"
-        placeholder="Target Price"
-        value={target}
-        onChange={(e) => setTarget(e.target.value)}
-      />
-      <button type="submit" onClick={save}>
-        Save Alert
-      </button>
-      <p id="price"></p>
+    <div className={styles.form}>
+      <h1 className={styles.formTitle}>Crypto Alert</h1>
+      <div className={styles.inputDiv}>
+        <input
+          type="text"
+          placeholder="Coin"
+          value={coinName}
+          onChange={(e) => setCoinName(e.target.value)}
+        />
+        <input
+          type="number"
+          placeholder="Target Price"
+          value={target}
+          onChange={(e) => setTarget(e.target.value)}
+        />
+        <button className={styles.alertBtn} style={{backgroundColor:'#515151'}} type="submit" onClick={save}>
+          Save Alert
+        </button>
+      </div>
     </div>
   );
 }

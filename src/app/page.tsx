@@ -1,7 +1,6 @@
 import Form from '@/components/Form'
 import Alert from '../components/Alert'
-import { Metadata } from 'next'
-// import '../styles/global.css'
+import '../styles/global.css'
 
 
 export default function Home() {

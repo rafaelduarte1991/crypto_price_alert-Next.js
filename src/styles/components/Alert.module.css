@@ -1,0 +1,47 @@
+.alert {
+  display: grid;
+  margin-top: 40px;
+  border: 1px #fff solid;
+  max-width: 1200px;
+  width: 95%;
+  align-self: center;
+}
+
+.title {
+  font-weight: 700;
+  text-align: center;
+  font-size: 18px;
+  padding: 20px 0;
+  border: #fff 1px solid;
+}
+
+.table {
+  text-align: center;
+}
+
+.table th {
+  padding: 10px 0;
+  border: #fff 1px solid;
+}
+.table td {
+  background-color: #ec2d2d;
+  color: black;
+  font-size: 17px;
+  border: #fff 1px solid;
+}
+
+.actionIcons{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+  background-color: #00161a;
+}
+
+@media (max-width: 480px) {
+  .actionIcons {
+    flex-direction: column;
+    gap: 0px;
+  }
+}

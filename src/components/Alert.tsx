@@ -1,44 +1,89 @@
 'use client'
-
-import useSWR from 'swr';
+import { useContext, useState } from 'react'
+import { CoinsContext } from '@/app/context/CoinsContext';
+import styles from '../styles/components/Alert.module.css'
+import { iCoin } from '@/pages/api/coins';
+import CoinPrice from './CoinPrice'
 
 export default function Alert() {
-  const dataObject = JSON.parse(localStorage.getItem('data') || '{}');
-  const dataArray = [dataObject];
-  console.log(dataArray)
-  const coin = dataArray[0].coin
-  const url = `https://api.coinbase.com/v2/prices/${coin}-USD/sell`
+  const { coins, updateCoin, removeCoin } = useContext(CoinsContext);
+  const [updtCoin, setUpdtCoin] = useState(false);
+  const [editedName, setEditedName] = useState('');
+  const [editedTarget, setEditedTarget] = useState('');
+  const [isEditing, setIsEditing] = useState(false);
 
-  const fetcher = async (url: string) => {
-    const response = await fetch(url);
-    const data = await response.json();
-    return data.data.amount;
-  };
-
-  const { data: price, error } = useSWR(url, fetcher, {
-    refreshInterval: 3000,
-  });
-
-  if (error) return <div>Error ao buscar dados</div>;
-  if (!price) return <div>Carregando...</div>;
 
   return (
-    <div>
-      <h3>Active Alerts</h3>
-      <table>
+    <div className={styles.alert}>
+      <h3 className={styles.title}>Active Alerts</h3>
+      <table className={styles.table}>
         <thead>
           <tr>
             <th>Coin</th>
             <th>Current Price</th>
             <th>Target Price</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          {dataArray && dataArray.map((item: any, index: number) => (
+          {coins && coins.map((item: iCoin, index: number) => (
             <tr key={index}>
-              <td id="alertCoin">{item.coin} - USD</td>
-              <td id="alertCurrPrice">{price}</td>
-              <td id="alertPrice">{item.target}</td>
+              <td>
+                {updtCoin ? (
+                  <input
+                    type="text"
+                    value={editedName === '' ? item.name : editedName}
+                    onChange={(e) => {
+
+                      setEditedName(e.target.value)
+                    }}
+                    onKeyPress={(e) => {
+                      if (e.key === 'Enter') {
+                        const coin = {
+                          ...item,
+                          name: editedName
+                        }
+                        updateCoin(coin)
+                        setUpdtCoin(false)
+                      }
+                    }}
+                    autoFocus
+                  />
+                ) : (
+                  <div>
+                    {item.name} - USD
+                  </div>
+                )}
+              </td>
+              <td><CoinPrice coin={item}/></td>
+              <td>
+                {updtCoin ? (
+                  <input
+                    type="text"
+                    onClick={() =>setIsEditing(true)}
+                    value={isEditing ? editedTarget : item.target}
+                    onChange={(e) => {
+                      setEditedTarget(e.target.value)
+                    }}
+                    onKeyPress={(e) => {
+                      if (e.key === 'Enter') {
+                        const coin = {
+                          ...item,
+                          target: parseFloat(editedTarget)
+                        }
+                        updateCoin(coin)
+                        setUpdtCoin(false)
+                      }
+                    }}
+                    autoFocus
+                  />
+                ) : (
+                  <div>
+                    {(item.target)}
+                  </div>
+                )}
+                </td>
+              <td className={styles.actionIcons}><a onClick={() => setUpdtCoin(true)}>&#128393;</a><a onClick={() => removeCoin(item)}>&#10060;</a></td>
             </tr>
           ))}
         </tbody>

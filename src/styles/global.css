@@ -1,0 +1,94 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+:root {
+  --primary-1: #e5fcff;
+  --primary-2: #ccf9ff;
+  --primary-3: #99f3ff;
+  --primary-4: #66ecff;
+  --primary-5: #33e6ff;
+  --primary-6: #00e0ff;
+  --primary-7: #00c4df;
+  --primary-8: #008699;
+  --primary-9: #005a66;
+  --primary-10: #002d33;
+  --primary-11: #00161a;
+  --complementary-1: #07a1c8;
+  --complementary-2: #005c70;
+  --complementary-3: #e8e8e8;
+  --complementary-4: #515151;
+  --complementary-5: #f1a818;
+  --complementary-6: #dc4123;
+  --system-color-success: #00c44f;
+  --system-color-error: #f94242;
+  --system-color-warning: #f9b732;
+  --system-color-info: #32b1e0;
+  --bg-cards-1: #fafafa;
+  --bg-cards-2: #f4f4f4;
+  --bg-cards-3: #f0f0f0;
+  --bg-cards-4: #ebebeb;
+  --bg-cards-5: #e0e0e0;
+  --text-color-1: #121212;
+  --text-color-2: #1f1f1f;
+  --text-color-3: #363636;
+  --text-color-4: #474747;
+  --text-color-5: #595959;
+  --text-color-6: #c7c0c0;
+  --label-1: #ffa755;
+  --label-2: #bb67ef;
+  --label-3: #61c065;
+  --label-4: #fe71f0;
+  --label-5: #55cfc8;
+  --label-6: #ec6868;
+  --label-7: #c0ff00;
+  --label-8: #4775ff;
+  --label-9: #ffff2f;
+  --label-10: #ff5942;
+}
+/*configurando dessa maneira a tela se comportará em harmonia no zoom
+Ex: coloquei no botão um height de 3rem ele vai diminuir por causa da fonte,
+de acordo com o tamanho*/
+@media (max-width: 1080px) {
+  html {
+    font-size: 93.75%; /* Até 1080 trabalhar com 93.75% de 1rem*/
+  }
+}
+@media (max-width: 720px) {
+  html {
+    font-size: 87.5%; /* Até 1080 trabalhar com 87.5% de 1rem*/
+  }
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: var(--primary-11);
+  color: var(--text-color-6);
+  min-width: 320px;
+}
+
+body,
+input,
+textarea,
+button {
+  font: 400 1rem 'Montserrat'; /*1rem = 16px, usar rem porque se adapta a tela*/
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
