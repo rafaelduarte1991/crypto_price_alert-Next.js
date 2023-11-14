@@ -1,72 +1,113 @@
-'use client'
-import { createContext, ReactNode, useEffect, useState } from 'react'
-import { iCoin } from '../../pages/api/coins'
+// import { createContext, useContext, useState } from 'react';
 
-interface iNewCoin {
-  name: string
-  target: number
-}
-interface iCoinsContextData {
-  coins: iCoin[]
-  addCoin: (coin: iNewCoin) => void
-  removeCoin: (removedCoin: iCoin) => void
-  updateCoin: (updatedCoin: iCoin) => void
-}
-interface iCoinsContextProps {
-  children: ReactNode
-}
+// interface iCoinsContextData {
+//   coins: iCoin[]
+//   addCoin: (coin: iNewCoin) => void
+//   removeCoin: (removedCoin: iCoin) => void
+//   updateCoin: (updatedCoin: iCoin) => void
+// }
+// interface iCoinsContextProps {
+//   children: ReactNode
+// }
 
-export const CoinsContext = createContext({} as iCoinsContextData)
+// const AlertContext = createContext({} as iCoinsContextData);
 
-export function CoinsProvider({ children }: iCoinsContextProps) {
-  const [coins, setCoins] = useState([] as iCoin[])
-  useEffect(() => {
-    setCoins(getCoins())
-  }, [])
+// export function useAlertContext() {
+//   return useContext(AlertContext);
+// }
 
-  function getCoins() {
-    const coinsJSON = localStorage.getItem('coins')
-    if (coinsJSON) {
-      return JSON.parse(coinsJSON).map((coin:any) => {
-        return {
-          ...coin,
-        }
-      })
-    } else {
-      return []
-    }
-  }
+// export function AlertProvider({ children }) {
+//   const [formData, setFormData] = useState(null);
 
-  function updateCoin(updatedCoin: iCoin) {
-    const updatedCoins = coins.map((coin) => (coin.id === updatedCoin.id ? updatedCoin : coin))
+//   const handleFormSubmit = (data) => {
+//     setFormData(data);
+//   };
 
-    setCoins(updatedCoins)
-    localStorage.setItem('coins', JSON.stringify(updatedCoins))
-  }
+//   return (
+//     <AlertContext.Provider
+//       value={{ formData, handleFormSubmit }}>
+//       {children}
+//     </AlertContext.Provider>
+//   );
+// }
 
-  function addCoin(coin: iNewCoin) {
-    const id = (coins.sort((a, b) => b.id - a.id)[0]?.id || 0) + 1
-    const newCoins = [...coins, { ...coin, id }]
-    setCoins(newCoins)
-    localStorage.setItem('coins', JSON.stringify(newCoins))
-  }
 
-  function removeCoin(removedCoin: iCoin) {
-    const newCoins = [...coins].filter((coin) => coin.id !== removedCoin.id)
-    setCoins(newCoins)
-    localStorage.setItem('coins', JSON.stringify(newCoins))
-  }
+// // 'use client'
+// // import { createContext, ReactNode, useEffect, useState } from 'react'
+// // import { iCoin } from '@/pages/api/coins/route'
+// // // import { ObjectId } from 'mongodb'
 
-  return (
-    <CoinsContext.Provider
-      value={{
-        coins,
-        addCoin,
-        removeCoin,
-        updateCoin,
-      }}
-    >
-      {children}
-    </CoinsContext.Provider>
-  )
-}
+// // interface iNewCoin {
+// //   // _id: ObjectId
+// //   name: string
+// //   target: number
+// // }
+// // interface iCoinsContextData {
+// //   coins: iCoin[]
+// //   addCoin: (coin: iNewCoin) => void
+// //   removeCoin: (removedCoin: iCoin) => void
+// //   updateCoin: (updatedCoin: iCoin) => void
+// // }
+// // interface iCoinsContextProps {
+// //   children: ReactNode
+// // }
+
+// // export const CoinsContext = createContext({} as iCoinsContextData)
+
+// // export function CoinsProvider({ children }: iCoinsContextProps) {
+// //   const [coins, setCoins] = useState([] as iCoin[])
+// //   // const [coins, setCoins] = useState<iCoin[]>([]);
+
+// //   // const [coins, setCoins] = useState<iCoin[]>([]);
+
+// //   useEffect(() => {
+// //     setCoins(getCoins());
+// //   }, []);
+
+// //   function getCoins() {
+// //     const coinsJSON = localStorage.getItem('coins')
+// //     if (coinsJSON) {
+// //       return JSON.parse(coinsJSON).map((coin:any) => {
+// //         return {
+// //           ...coin,
+// //         }
+// //       })
+// //     } else {
+// //       return []
+// //     }
+// //   }
+
+// //   function updateCoin(updatedCoin: iCoin) {
+// //     const updatedCoins = coins.map((coin) => (coin._id === updatedCoin._id ? updatedCoin : coin))
+// //     setCoins(updatedCoins)
+// //     localStorage.setItem('coins', JSON.stringify(updatedCoins))
+// //   }
+
+// //   function addCoin(coin: iNewCoin) {
+// //     const _id = (coins.sort((a, b) => b._id - a._id)[0]?._id || 0) + 1
+// //     const newCoin = [...coins, { ...coin, _id:_id }]
+// //     // const newCoin = { ...coin, _id: new ObjectId() }
+// //     setCoins(newCoin)
+// //     // setCoins((prevCoins) => [...prevCoins, newCoin])
+// //     localStorage.setItem('coins', JSON.stringify(newCoin))
+// //   }
+
+// //   function removeCoin(removedCoin: iCoin) {
+// //     const newCoins = [...coins].filter((coin) => coin._id !== removedCoin._id)
+// //     setCoins(newCoins)
+// //     localStorage.setItem('coins', JSON.stringify(newCoins))
+// //   }
+
+// //   return (
+// //     <CoinsContext.Provider
+// //       value={{
+// //         coins,
+// //         addCoin,
+// //         removeCoin,
+// //         updateCoin,
+// //       }}
+// //     >
+// //       {children}
+// //     </CoinsContext.Provider>
+// //   )
+// // }
