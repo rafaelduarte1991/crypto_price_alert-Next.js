@@ -1,35 +1,36 @@
-// import { createContext, useContext, useState } from 'react';
+'use client'
+import React, { ReactNode, createContext, useContext, useState } from 'react'
+import { iCoin } from '../api/coins/route'
 
-// interface iCoinsContextData {
-//   coins: iCoin[]
-//   addCoin: (coin: iNewCoin) => void
-//   removeCoin: (removedCoin: iCoin) => void
-//   updateCoin: (updatedCoin: iCoin) => void
+interface iUpdateContextData {
+  // coin: iCoin
+  triggerUpdate : () => void
+  updateDb: boolean
+}
+interface iUpdateContextProps {
+  children: ReactNode
+}
+export const UpdateContext = createContext({} as iUpdateContextData)
+
+export const UpdateProvider = ({ children }: iUpdateContextProps) => {
+  // const [coinPosted, setCoinPosted] = useState({ nome: '', preco: '' })
+  const [updateDb, setUpdateDb] = useState(false)
+
+  function triggerUpdate () {
+    setUpdateDb(!updateDb)
+  }
+
+  return (
+    <UpdateContext.Provider value={{ updateDb, triggerUpdate }}>
+      {children}
+    </UpdateContext.Provider>
+  )
+}
+
+// export const useData = () => {
+//   return useContext(CoinsContext)
 // }
-// interface iCoinsContextProps {
-//   children: ReactNode
-// }
 
-// const AlertContext = createContext({} as iCoinsContextData);
-
-// export function useAlertContext() {
-//   return useContext(AlertContext);
-// }
-
-// export function AlertProvider({ children }) {
-//   const [formData, setFormData] = useState(null);
-
-//   const handleFormSubmit = (data) => {
-//     setFormData(data);
-//   };
-
-//   return (
-//     <AlertContext.Provider
-//       value={{ formData, handleFormSubmit }}>
-//       {children}
-//     </AlertContext.Provider>
-//   );
-// }
 
 
 // // 'use client'
@@ -56,13 +57,13 @@
 
 // // export function CoinsProvider({ children }: iCoinsContextProps) {
 // //   const [coins, setCoins] = useState([] as iCoin[])
-// //   // const [coins, setCoins] = useState<iCoin[]>([]);
+// //   // const [coins, setCoins] = useState<iCoin[]>([])
 
-// //   // const [coins, setCoins] = useState<iCoin[]>([]);
+// //   // const [coins, setCoins] = useState<iCoin[]>([])
 
 // //   useEffect(() => {
-// //     setCoins(getCoins());
-// //   }, []);
+// //     setCoins(getCoins())
+// //   }, [])
 
 // //   function getCoins() {
 // //     const coinsJSON = localStorage.getItem('coins')

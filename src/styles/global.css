@@ -53,17 +53,15 @@
   --label-9: #ffff2f;
   --label-10: #ff5942;
 }
-/*configurando dessa maneira a tela se comportará em harmonia no zoom
-Ex: coloquei no botão um height de 3rem ele vai diminuir por causa da fonte,
-de acordo com o tamanho*/
+
 @media (max-width: 1080px) {
   html {
-    font-size: 93.75%; /* Até 1080 trabalhar com 93.75% de 1rem*/
+    font-size: 93.75%;
   }
 }
 @media (max-width: 720px) {
   html {
-    font-size: 87.5%; /* Até 1080 trabalhar com 87.5% de 1rem*/
+    font-size: 87.5%;
   }
 }
 
@@ -78,7 +76,7 @@ body,
 input,
 textarea,
 button {
-  font: 400 1rem 'Montserrat'; /*1rem = 16px, usar rem porque se adapta a tela*/
+  font: 400 1rem 'Montserrat';
 }
 
 button {

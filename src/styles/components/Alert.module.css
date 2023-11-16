@@ -24,9 +24,6 @@
   border: #fff 1px solid;
 }
 .table td {
-  background-color: #ec2d2d;
-  color: black;
-  font-size: 17px;
   border: #fff 1px solid;
 }
 
@@ -38,6 +35,8 @@
   align-items: center;
   background-color: #00161a;
 }
+
+
 
 @media (max-width: 480px) {
   .actionIcons {

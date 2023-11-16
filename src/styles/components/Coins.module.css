@@ -1,0 +1,14 @@
+@keyframes blink {
+  0%, 100% { background-color: green; }
+  50% { background-color: transparent; }
+}
+.blinkRow {
+  animation: blink 1s 5;
+  background-color: green;
+
+}
+.notActive {
+  background-color: #ec2d2d;
+  color: black;
+  font-size: 17px;
+}

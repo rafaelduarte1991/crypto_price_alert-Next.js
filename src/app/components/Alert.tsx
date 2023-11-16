@@ -1,49 +1,36 @@
 'use client'
 import styles from '@/styles/components/Alert.module.css'
-import CoinPrice from './CoinPrice'
-import {HiOutlineTrash, HiPencilAlt} from 'react-icons/hi'
+// import CoinPrice from './CoinPrice'
 import { iCoin } from '@/app/api/coins/route'
-import { useEffect, useState } from 'react';
-import useSWR from 'swr';
+import useSWR, { mutate } from 'swr'
 import RemoveBtn from './RemoveBtn'
-import { useRouter } from 'next/navigation'
+import { useContext, useEffect, useState } from 'react'
+import { UpdateContext } from '../context/UpdateContext'
+import Coins from './Coins'
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json())
 
 export default function Alert() {
-  // const router = useRouter()
-  // const [editedName, setEditedName] = useState('');
-  // const [editedTarget, setEditedTarget] = useState('');
-  // const [isEditing, setIsEditing] = useState(false);
+  const { updateDb } = useContext(UpdateContext)
+  const [hasPassedTargets, setHasPassedTargets] = useState<{ [key: string]: boolean }>({})
 
   const { data, error } = useSWR('/api/coins', fetcher)
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const newData = await fetcher('/api/coins')
+        mutate('/api/coins', newData, false)
+      } catch (error) {
+        console.log("Error in the data processing from form", error)
+      }
+    }
+    fetchData()
+  }, [updateDb])
 
   if (error) return <div>Failed to load</div>
   if (!data) return <div>Loading...</div>
 
-
-
-  // const handleSubmit = async (e: any) => {
-  //   e.preventDefault()
-  //   try {
-  //     const name = editedName.toUpperCase()
-  //     const target = parseFloat(editedTarget.replace(',', '.'))
-  //     const res = await fetch(`/api/coins/${updtCoin}`, {
-  //       method: 'PUT',
-  //       headers: {
-  //         "Content-type": "application/json"
-  //       },
-  //       body: JSON.stringify({name, target}),
-  //     })
-  //     if(res.ok) {
-  //       router.refresh()
-  //     } else {
-  //       throw new Error("Failed to updat coin")
-  //     }
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
 
   return (
     <div className={styles.alert}>
@@ -58,21 +45,8 @@ export default function Alert() {
           </tr>
         </thead>
         <tbody>
-          {data && (data.coins as iCoin[])?.map((item: iCoin) => (
-            <tr key={item._id}>
-              <td>
-                {item.name} - USD
-              </td>
-              <td>
-                <CoinPrice coinName={item.name} />
-              </td>
-              <td>
-                {(item.target)}
-              </td>
-              <td className={styles.actionIcons}>
-                <RemoveBtn id={item._id} />
-              </td>
-            </tr>
+          {data && (data.coins as iCoin[])?.map((item: iCoin, index:number) => (
+            <Coins key={index} id={item._id} name={item.name} target={item.target}/>
           ))}
         </tbody>
       </table>

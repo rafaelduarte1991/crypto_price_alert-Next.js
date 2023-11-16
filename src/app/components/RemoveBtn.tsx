@@ -1,12 +1,16 @@
 'use client'
 import { useRouter } from 'next/navigation'
+import { useContext } from 'react'
 import {HiOutlineTrash} from 'react-icons/hi'
+import { UpdateContext } from '../context/UpdateContext'
 
 interface Props {
-  id: string;
+  id: string
 }
 
 export default function Alert({id}:Props) {
+  const { triggerUpdate } = useContext(UpdateContext)
+
   const router = useRouter()
   const removeCoin = async () => {
     const confirmed = confirm("Are you sure?")
@@ -15,7 +19,7 @@ export default function Alert({id}:Props) {
         method: 'DELETE',
       })
       if(res.ok) {
-        router.push("/")
+        triggerUpdate()
       }
     }
   }
@@ -24,6 +28,6 @@ export default function Alert({id}:Props) {
     <button onClick={removeCoin}>
       <HiOutlineTrash size={20} />
     </button>
-  );
+  )
 }
 

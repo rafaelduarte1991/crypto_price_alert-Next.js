@@ -3,9 +3,9 @@ import Coins from '../../../../models/coins'
 import { NextResponse } from 'next/server'
 
 export interface iCoin {
-  _id: string;
-  name: string;
-  target: number;
+  _id: string
+  name: string
+  target: number
 }
 
 export async function GET() {
@@ -22,7 +22,7 @@ export async function POST(request:any) {
 }
 
 // export async function PUT(request:any) {
-//   const { _id, name, target } = await request.json();
+//   const { _id, name, target } = await request.json()
 //   await connectDatabase()
 //   await Coins.findByIdAndUpdate(_id, {name, target})
 //   return NextResponse.json({message:"Coin updated"}, {status:200})
