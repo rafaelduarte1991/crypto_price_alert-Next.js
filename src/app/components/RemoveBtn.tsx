@@ -1,5 +1,4 @@
 'use client'
-import { useRouter } from 'next/navigation'
 import { useContext } from 'react'
 import {HiOutlineTrash} from 'react-icons/hi'
 import { UpdateContext } from '../context/UpdateContext'
@@ -11,7 +10,6 @@ interface Props {
 export default function Alert({id}:Props) {
   const { triggerUpdate } = useContext(UpdateContext)
 
-  const router = useRouter()
   const removeCoin = async () => {
     const confirmed = confirm("Are you sure?")
     if(confirmed) {

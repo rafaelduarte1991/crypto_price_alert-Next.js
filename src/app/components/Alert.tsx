@@ -1,9 +1,7 @@
 'use client'
 import styles from '@/styles/components/Alert.module.css'
-// import CoinPrice from './CoinPrice'
 import { iCoin } from '@/app/api/coins/route'
 import useSWR, { mutate } from 'swr'
-import RemoveBtn from './RemoveBtn'
 import { useContext, useEffect, useState } from 'react'
 import { UpdateContext } from '../context/UpdateContext'
 import Coins from './Coins'
@@ -12,7 +10,6 @@ const fetcher = (url: string) => fetch(url).then((res) => res.json())
 
 export default function Alert() {
   const { updateDb } = useContext(UpdateContext)
-  const [hasPassedTargets, setHasPassedTargets] = useState<{ [key: string]: boolean }>({})
 
   const { data, error } = useSWR('/api/coins', fetcher)
 

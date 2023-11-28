@@ -1,5 +1,4 @@
 import { ReactNode } from 'react'
-import { Metadata } from 'next'
 import { Montserrat } from 'next/font/google'
 import { UpdateProvider } from './context/UpdateContext'
 
@@ -13,7 +12,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <head />
       <body className={montserrat.className}>
         <UpdateProvider>{children}</UpdateProvider>
-        {/* <div>{children}</div> */}
       </body>
     </html>
   )

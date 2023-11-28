@@ -21,13 +21,6 @@ export async function POST(request:any) {
   return NextResponse.json({message:"Coin added"}, {status:201})
 }
 
-// export async function PUT(request:any) {
-//   const { _id, name, target } = await request.json()
-//   await connectDatabase()
-//   await Coins.findByIdAndUpdate(_id, {name, target})
-//   return NextResponse.json({message:"Coin updated"}, {status:200})
-// }
-
 export async function DELETE(request:any) {
   const id = request.nextUrl.searchParams.get("id")
   await connectDatabase()
