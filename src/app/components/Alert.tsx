@@ -2,7 +2,7 @@
 import styles from '@/styles/components/Alert.module.css'
 import { iCoin } from '@/app/api/coins/route'
 import useSWR, { mutate } from 'swr'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect } from 'react'
 import { UpdateContext } from '../context/UpdateContext'
 import Coins from './Coins'
 
@@ -26,7 +26,7 @@ export default function Alert() {
   }, [updateDb])
 
   if (error) return <div>Failed to load</div>
-  if (!data) return <div>Loading...</div>
+  if (!data) return <div>Loading</div>
 
 
   return (
