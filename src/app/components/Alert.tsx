@@ -5,6 +5,8 @@ import useSWR, { mutate } from 'swr'
 import { useContext, useEffect } from 'react'
 import { UpdateContext } from '../context/UpdateContext'
 import Coins from './Coins'
+import Loading from './Loading'
+
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json())
 
@@ -26,7 +28,7 @@ export default function Alert() {
   }, [updateDb])
 
   if (error) return <div>Failed to load</div>
-  if (!data) return <div>Loading</div>
+  if (!data) return <Loading/>
 
 
   return (

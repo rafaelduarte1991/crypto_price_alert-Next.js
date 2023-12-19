@@ -36,8 +36,6 @@
   background-color: #00161a;
 }
 
-
-
 @media (max-width: 480px) {
   .actionIcons {
     flex-direction: column;
