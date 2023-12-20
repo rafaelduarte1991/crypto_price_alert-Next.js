@@ -30,4 +30,9 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## App images
+
+![image](https://github.com/rafaelduarte1991/crypto_price_alert-Next.js/assets/72820242/1871d021-ee86-43f2-8a29-1836a17d4a45)
+
+
 
